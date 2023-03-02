@@ -2,7 +2,7 @@ name: Python Scheduled Script
 
 on:
   schedule:
-  - cron : "50 0 * * *"
+  - cron : "3 * * * *"
 
 jobs:
   build:
