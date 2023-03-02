@@ -1,0 +1,42 @@
+name: Python Scheduled Script
+
+on:
+  schedule:
+  - cron : "55 0 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name : Set Timezone
+        uses : szenius/set-timezone@v1.0
+        with :
+          timezoneLinux: "Europa/Berlin"
+      
+      - name : Chechout repository content
+        uses : actions/checkout@v2 
+      
+      - name : Setup Python Version
+        uses : actions/setup-python@v2
+        with :
+          python-version : 3.9 # Python Version Control
+      
+      - name : Install Python dependencies
+        uses : py-actions/py-dependecy-install@v2
+        with :
+          path : "requirements.txt"
+          
+      - name : Execute Python script
+        run  : pthon main_web_scraping.py
+        
+      - name : Commit File
+        run  : 
+          git config --local user.name abdullahcayde
+          git config --local user.email "abdullahcay26@gmail.com"
+          git add --all
+          git commit -am "GH ACTION Headlines $(date)"
+          git push
+        env:
+          REPO_KEY : ${{secrets.GITHUB_TOKEN}}
+          username : github-actions
