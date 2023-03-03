@@ -9,18 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name : Set Timezone
-        uses : szenius/set-timezone@v1.0
-        with :
-          timezoneLinux: "Europa/Berlin"
-      
       - name : Chechout repository content
         uses : actions/checkout@v2 
       
       - name : Setup Python Version
         uses : actions/setup-python@v2
         with :
-          python-version : 3.9 # Python Version Control
+          python-version : "3.9" # Python Version Control
       
       - name : Install Python dependencies
         uses : py-actions/py-dependecy-install@v2
@@ -28,11 +23,11 @@ jobs:
           path : "requirements.txt"
           
       - name : Execute Python script
-        run  : python main_web_scraping.py
+        run  : python main_scrape.py
         
       - name : Commit File
         run  : |
-          git config --local user.name abdullahcayde
+          git config --local user.name "abdullahcayde"
           git config --local user.email "abdullahcay26@gmail.com"
           git add --all
           git commit -am "GH ACTION Headlines $(date)"|
