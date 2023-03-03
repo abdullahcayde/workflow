@@ -31,11 +31,11 @@ jobs:
         run  : python main_web_scraping.py
         
       - name : Commit File
-        run  : 
+        run  : |
           git config --local user.name abdullahcayde
           git config --local user.email "abdullahcay26@gmail.com"
           git add --all
-          git commit -am "GH ACTION Headlines $(date)"
+          git commit -am "GH ACTION Headlines $(date)"|
           git push
         env:
           REPO_KEY : ${{secrets.GITHUB_TOKEN}}
