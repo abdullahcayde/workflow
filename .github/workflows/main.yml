@@ -2,7 +2,7 @@ name: Python Scheduled Script
 
 on:
   schedule:
-  - cron : "0 1 * * *"
+  - cron : "3 * * * *"
 
 jobs:
   build:
@@ -28,7 +28,7 @@ jobs:
           path : "requirements.txt"
           
       - name : Execute Python script
-        run  : pthon main_web_scraping.py
+        run  : python main_web_scraping.py
         
       - name : Commit File
         run  : 
